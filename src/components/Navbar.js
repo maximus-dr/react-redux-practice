@@ -1,8 +1,7 @@
 import React from 'react'
 import { NavLink, withRouter } from 'react-router-dom'
 
-function Navbar(props) {
-  console.log(props);
+function Navbar() {
   
   return (
     <nav className="nav-wrapper red darken-3">
