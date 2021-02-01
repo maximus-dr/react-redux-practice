@@ -1,27 +1,14 @@
-import axios from 'axios';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Avatar from '../avatar.jpg';
 
 
-export default class Home extends Component {
-
-  state = {
-    posts: []
-  }
-
-  componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/posts')
-      .then(response => {
-        this.setState({
-          posts: response.data.slice(0, 10)
-        })
-      })
-  }
+class Home extends Component {
 
   render() {
 
-    const { posts } = this.state;
+    const { posts } = this.props;
     const postsList = posts.length
       ? posts.map(post => {
         return (
@@ -46,3 +33,11 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts
+  }
+}
+
+export default connect(mapStateToProps)(Home);
