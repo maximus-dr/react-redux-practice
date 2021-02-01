@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Avatar from '../avatar.jpg';
 
 
 export default class Home extends Component {
@@ -25,7 +26,8 @@ export default class Home extends Component {
       ? posts.map(post => {
         return (
           <div className="post card" key={post.id}>
-            <Link to={`/${post.id}`}>
+            <Link to={`/${post.id}`} className="post__link" >
+              <img src={Avatar} alt="user"/>
               <div className="card-content">
                 <span className="card-title">{post.title}</span>
                 <p>{post.body}</p>
@@ -37,7 +39,7 @@ export default class Home extends Component {
       : <div className="center">No posts yet</div>
 
     return (
-      <div className="container">
+      <div className="container home">
         <h4 className="center">Home Page</h4>
         {postsList}
       </div>
