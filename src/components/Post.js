@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 
 class Post extends Component {
   
+  handleClick = () => {
+    let id = this.props.post.id;
+    this.props.deletePost(id);
+    this.props.history.push('/');
+  }
+  
   render() {
 
     const post = this.props.post
@@ -12,6 +18,11 @@ class Post extends Component {
             {this.props.post.title}
           </h4>
           <p>{this.props.post.body}</p>
+          <div className="center">
+            <button className="btn greys" onClick={this.handleClick}>
+              Delete Post
+            </button>
+          </div>
         </div>
       )
       : (
@@ -34,4 +45,12 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps)(Post);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    deletePost: (id) => {
+      dispatch({ type: 'DELETE_POST', id: id });
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
